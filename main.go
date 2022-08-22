@@ -1,0 +1,33 @@
+package main
+
+import (
+	"fmt"
+	"unsafe"
+)
+
+func main() {
+	var inte interface{}
+	var boolean bool
+
+	fmt.Println("interface: ", unsafe.Sizeof(inte))
+	fmt.Println("bool: ", unsafe.Sizeof(boolean))
+	fmt.Println(pow(26))
+	fmt.Println(pow2(32))
+
+}
+
+func pow(time int) uint64 {
+	var num uint64 = 1
+	for i := 0; i < time; i++ {
+		num *= 100
+	}
+	return num
+}
+
+func pow2(time int) int {
+	num := 1
+	for i := 0; i < time; i++ {
+		num *= 2
+	}
+	return num
+}
