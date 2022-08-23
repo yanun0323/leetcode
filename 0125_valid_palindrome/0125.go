@@ -1,7 +1,5 @@
 package main
 
-import "fmt"
-
 func isPalindrome(s string) bool {
 	if len(s) == 0 {
 		return true
@@ -15,9 +13,6 @@ func isPalindrome(s string) bool {
 		if lp >= rp {
 			return true
 		}
-		fmt.Println(string(s[lp]), ":", string(s[rp]))
-		fmt.Println(s[lp], ":", s[rp])
-		fmt.Println(isSameCharacter(s[lp], s[rp]))
 		if isSameCharacter(s[lp], s[rp]) {
 			lp++
 			rp--
