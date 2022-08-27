@@ -15,6 +15,9 @@ func main() {
 	fmt.Println('A')
 	fmt.Println('Z')
 
+	s := "ABCDEFG"
+	fmt.Println(s[1:2])
+
 }
 
 func pow(time int) uint64 {
