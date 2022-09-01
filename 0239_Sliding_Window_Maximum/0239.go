@@ -1,35 +1,24 @@
 package main
 
-// TODO: [Yanun] Refactor
 func maxSlidingWindow(nums []int, k int) []int {
-	if k == 1 {
-		return nums
-	}
 	answer := make([]int, 0, len(nums)-(k-1))
-	max := nums[0]
-	lp := 0
+	win := make([]int, 0, k)
 	for i := range nums {
-		if nums[i] > max {
-			max = nums[i]
+		l := len(win) - 1
+		for l >= 0 && nums[i] > nums[win[l]] {
+			l--
 		}
-		if i == k-1 {
-			answer = append(answer, max)
-			continue
-		}
-		if i < k {
-			continue
-		}
-		if nums[lp] == max {
-			p := lp + 1
-			max = nums[p]
-			for ; p < i+1; p++ {
-				if nums[p] > max {
-					max = nums[p]
-				}
+		if len(win) != 0 {
+			if l == -1 || win[0] != i-k {
+				win = win[:l+1]
+			} else {
+				win = win[1 : l+1]
 			}
 		}
-		answer = append(answer, max)
-		lp++
+		win = append(win, i)
+		if i >= k-1 {
+			answer = append(answer, nums[win[0]])
+		}
 	}
 	return answer
 }

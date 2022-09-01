@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"sync"
+)
 
 func main() {
 	// var inte interface{}
@@ -14,9 +17,35 @@ func main() {
 	fmt.Println('z')
 	fmt.Println('A')
 	fmt.Println('Z')
+	ch := make(chan int, 40)
+	wg := &sync.WaitGroup{}
+	wg.Add(40)
+	for i := 0; i < 40; i++ {
+		ch <- i
+		wg.Done()
+	}
+	wg.Wait()
 
-	s := "ABCDEFG"
-	fmt.Println(s[1:2])
+	fmt.Println("len: ", len(ch))
+	wg.Add(len(ch))
+	c := len(ch)
+	for i := 0; i < c; i++ {
+		e := <-ch
+		if e > 10 {
+			ch <- e
+		}
+		wg.Done()
+	}
+	wg.Wait()
+
+	wg.Add(len(ch))
+	c = len(ch)
+	fmt.Println("len: ", len(ch))
+	for i := 0; i < c; i++ {
+		fmt.Println(<-ch)
+		wg.Done()
+	}
+	wg.Wait()
 
 }
 
