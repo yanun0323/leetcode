@@ -1,9 +1,5 @@
 package main
 
-import (
-	. "main/node"
-)
-
 /*
 Definition for singly-linked list.
 
@@ -21,4 +17,9 @@ func swapPairs(head *ListNode) *ListNode {
 	right.Next = head
 
 	return right
+}
+
+type ListNode struct {
+	Val  int
+	Next *ListNode
 }
