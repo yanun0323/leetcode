@@ -1,19 +1,32 @@
 package main
 
-// target = 12, position = [10,8,0,5,3], speed = [2,4,1,1,3]
-// TODO: [Yanun] 
-func carFleet(target int, position []int, speed []int) int {
-	stack := make([]int, 0, len(position))
-	temp := make([]int, 0, len(position))
-	for i := range position {
-		speed[i] = (target - position[i]) / speed[i]
-	}
-	for i := range position {
-		if len(stack) == 0 {
-			stack = append(stack, position[i])
-			continue
-		}
+import (
+	"sort"
+)
 
-		if stack[len(stack)-1]
+type Car struct {
+	pos  int
+	time float64
+}
+
+func carFleet(target int, position []int, speed []int) int {
+	cars := make([]Car, 0, len(position))
+	for i := range position {
+		cars = append(cars, Car{
+			pos:  position[i],
+			time: float64(target-position[i]) / float64(speed[i]),
+		})
 	}
+	sort.Slice(cars, func(i, j int) bool {
+		return cars[i].pos > cars[j].pos
+	})
+	var tempTime float64 = 0
+	result := 0
+	for i := range cars {
+		if cars[i].time > tempTime {
+			result++
+			tempTime = cars[i].time
+		}
+	}
+	return result
 }
