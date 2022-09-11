@@ -19,4 +19,13 @@ func main() {
 	str := "123456"
 	fmt.Println(str[1:])
 
+	a := 1
+	b := 2
+	c := 3
+
+	a, b, c = c, a, b
+	// 3, 3, 3
+	// 3, 1, 2
+	fmt.Println(a, b, c)
+
 }
