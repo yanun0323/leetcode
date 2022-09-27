@@ -29,7 +29,8 @@ func main() {
 	fmt.Println(a, b, c)
 	fmt.Println(1 << 8)
 	fmt.Println(validUtf8([]int{197, 130, 1}))
-	fmt.Println(255 >> 1)
+	var ii int = ^(1 << 62) - 2
+	fmt.Println(ii)
 }
 
 func validUtf8(data []int) bool {
