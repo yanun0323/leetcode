@@ -5,10 +5,24 @@ type ListNode struct {
 	Next *ListNode
 }
 
-//
-// 123456
-// 12345
-func removeNthFromEnd2(head *ListNode, n int) *ListNode {
+func removeNthFromEnd(head *ListNode, n int) *ListNode {
+	count := 0
+	return DFS(head, &n, &count)
+}
+
+func DFS(head *ListNode, n, count *int) *ListNode {
+	if head == nil {
+		return nil
+	}
+	head.Next = DFS(head.Next, n, count)
+	*count++
+	if *count == *n {
+		return head.Next
+	}
+	return head
+}
+
+func removeNthFromEnd3(head *ListNode, n int) *ListNode {
 	count := 0
 	slow := &ListNode{}
 	fast := slow
@@ -42,11 +56,7 @@ func removeNthFromEnd2(head *ListNode, n int) *ListNode {
 	return head
 }
 
-// 2
-
-// X X X X X
-
-func removeNthFromEnd(head *ListNode, n int) *ListNode {
+func removeNthFromEnd2(head *ListNode, n int) *ListNode {
 	slow := &ListNode{}
 	fast := slow
 	slow.Next = head
