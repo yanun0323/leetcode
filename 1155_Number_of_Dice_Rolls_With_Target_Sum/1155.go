@@ -1,6 +1,6 @@
 package main
 
-// BUG: [1155] Stucked!
+// BUG: [1155] Stuck!
 // DP with array as memory
 // example:
 // diceCount = 3, maxDiceNum = 5, targetNum = 10
