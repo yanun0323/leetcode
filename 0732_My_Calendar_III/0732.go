@@ -1,6 +1,6 @@
 package main
 
-// BUG: [0732] Stuck!
+// BUG: [0732]
 type MyCalendarThree struct {
 	Bookings     [][2]int
 	Intersection [][2]int

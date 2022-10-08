@@ -1,6 +1,6 @@
 package main
 
-// BUG: [0211] Stuck!
+// BUG: [0211]
 type WordNode struct {
 	stored map[byte]*WordNode
 	isEnd  bool
