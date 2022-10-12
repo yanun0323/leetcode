@@ -4,7 +4,6 @@ import "sort"
 
 // BUG: [0976]
 // Use sort...
-
 func largestPerimeter(nums []int) int {
 	sort.Ints(nums)
 	ans := 0

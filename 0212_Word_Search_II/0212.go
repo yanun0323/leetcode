@@ -1,15 +1,51 @@
 package main
 
-type TriNode struct {
-	stored map[byte]*TriNode
-	isWord bool
-}
+// BUG: [0212]
+const _Empty byte = ' '
 
-func NewTriNode() *TriNode {
-	return &TriNode{
-		stored: map[byte]*TriNode{},
-		isWord: false,
+func findWords(board [][]byte, words []string) []string {
+	trie := NewTrie()
+	for i := range words {
+		trie.Insert(words[i])
 	}
+
+	outOfBounds := func(l, r int) bool {
+		return l < 0 || r < 0 || l >= len(board) || r >= len(board[0])
+	}
+
+	var find func(parent *TriNode, l, r int, result *[]string)
+	find = func(parent *TriNode, l, r int, result *[]string) {
+		if outOfBounds(l, r) {
+			return
+		}
+
+		letter := board[l][r]
+		node := parent.stored[letter]
+		if node == nil {
+			return
+		}
+
+		if len(node.word) > 0 {
+			*result = append(*result, node.word)
+			node.word = ""
+		}
+		board[l][r] = _Empty
+		find(node, l+1, r, result)
+		find(node, l-1, r, result)
+		find(node, l, r+1, result)
+		find(node, l, r-1, result)
+		board[l][r] = letter
+	}
+
+	result := make([]string, 0, len(words))
+	for l := 0; l < len(board); l++ {
+		for r := 0; r < len(board[l]); r++ {
+			if trie.root.stored[board[l][r]] != nil {
+				find(trie.root, l, r, &result)
+			}
+		}
+	}
+	return result
 }
 
 type Trie struct {
@@ -22,75 +58,25 @@ func NewTrie() Trie {
 	}
 }
 
-func findWords(board [][]byte, words []string) []string {
-	result := []string{}
-	charSheet := map[byte][][]int{}
-	for i := 0; i < len(board); i++ {
-		for j := 0; j < len(board[i]); j++ {
-			char := board[i][j]
-			charSheet[char] = append(charSheet[char], []int{i, j})
+func (t *Trie) Insert(word string) {
+	current := t.root
+	for i := range word {
+		if current.stored[word[i]] == nil {
+			current.stored[word[i]] = NewTriNode()
 		}
+		current = current.stored[word[i]]
 	}
-
-	for i := range words {
-		char := words[i][0]
-		if len(charSheet[char]) == 0 {
-			continue
-		}
-		found := false
-		iter := NewIterator(board, words[i], &found, &result)
-		for _, coord := range charSheet[char] {
-			iter.Find(coord[0], coord[1])
-			if found {
-				break
-			}
-		}
-	}
-	return result
+	current.word = word
 }
 
-type Iterator struct {
-	board  [][]byte
+type TriNode struct {
+	stored map[byte]*TriNode
 	word   string
-	index  int
-	found  *bool
-	result *[]string
 }
 
-func NewIterator(board [][]byte, word string, found *bool, result *[]string) Iterator {
-	return Iterator{
-		board:  board,
-		word:   word,
-		index:  0,
-		found:  found,
-		result: result,
+func NewTriNode() *TriNode {
+	return &TriNode{
+		stored: map[byte]*TriNode{},
+		word:   "",
 	}
-}
-
-func (i Iterator) Find(l, r int) {
-	if *i.found {
-		return
-	}
-	if i.index >= len(i.word) {
-		*i.found = true
-		*i.result = append(*i.result, i.word)
-		return
-	}
-
-	if l < 0 || r < 0 || l >= len(i.board) || r >= len(i.board[0]) {
-		return
-	}
-
-	if i.board[l][r] != i.word[i.index] {
-		return
-	}
-	letter := i.board[l][r]
-	i.board[l][r] = '.'
-	i.index++
-
-	i.Find(l-1, r)
-	i.Find(l, r-1)
-	i.Find(l+1, r)
-	i.Find(l, r+1)
-	i.board[l][r] = letter
 }

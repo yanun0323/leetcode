@@ -5,7 +5,7 @@ import (
 	"strings"
 )
 
-// BUG: [0297] Timeout!
+// BUG: [0297] Timeout Passed
 type Codec struct {
 	null string
 	sep  string
