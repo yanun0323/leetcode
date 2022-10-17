@@ -1,6 +1,6 @@
 package main
 
-// BUG: [0621]
+// FIXME: [0621]
 func leastInterval(tasks []byte, n int) int {
 	if n == 0 {
 		return len(tasks)

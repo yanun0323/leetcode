@@ -2,7 +2,7 @@ package main
 
 import "math"
 
-// BUG: [0334] MD
+// FIXME: [0334] MD
 func increasingTriplet(nums []int) bool {
 	if len(nums) < 3 {
 		return false

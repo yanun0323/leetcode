@@ -2,7 +2,7 @@ package main
 
 import "container/heap"
 
-// BUG: [0355] Timeout Passed
+// FIXME: [0355] Timeout Passed
 
 type Twitter struct {
 	users map[int]*User

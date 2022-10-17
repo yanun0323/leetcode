@@ -5,7 +5,7 @@ import (
 	"sort"
 )
 
-// BUG: [0703]
+// FIXME: [0703]
 type Heap struct {
 	l []int
 }

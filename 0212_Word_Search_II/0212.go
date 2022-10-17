@@ -1,6 +1,6 @@
 package main
 
-// BUG: [0212]
+// FIXME: [0212]
 const _Empty byte = ' '
 
 func findWords(board [][]byte, words []string) []string {

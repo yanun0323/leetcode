@@ -2,7 +2,7 @@ package main
 
 import "sort"
 
-// BUG: [0976]
+// FIXME: [0976]
 // Use sort...
 func largestPerimeter(nums []int) int {
 	sort.Ints(nums)

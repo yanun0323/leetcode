@@ -2,7 +2,7 @@ package main
 
 import "sort"
 
-// BUG: [1046]
+// FIXME: [1046]
 func fourSum(nums []int, target int) [][]int {
 	sort.Ints(nums)
 	return kSum(nums, target, 4)

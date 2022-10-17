@@ -1,6 +1,6 @@
 package main
 
-// BUG: [1578] Timeout Passed
+// FIXME: [1578] Timeout Passed
 func minCost(colors string, neededTime []int) int {
 	result := 0
 	max := neededTime[0]

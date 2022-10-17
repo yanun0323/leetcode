@@ -1,6 +1,6 @@
 package main
 
-// FIXME: [0009] Array method -> make a revert number and compare to input argument
+// HACK: [0009] Array method -> make a revert number and compare to input argument
 func isPalindrome(x int) bool {
 	if x < 0 {
 		return false

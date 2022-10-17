@@ -2,7 +2,7 @@ package main
 
 import "container/heap"
 
-// BUG: [0295]
+// FIXME: [0295]
 type MedianFinder struct {
 	right, reversed *Heap
 }

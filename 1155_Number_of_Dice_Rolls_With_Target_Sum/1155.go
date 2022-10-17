@@ -1,6 +1,6 @@
 package main
 
-// BUG: [1155]
+// FIXME: [1155]
 // DP with array as memory
 // example:
 // diceCount = 3, maxDiceNum = 5, targetNum = 10

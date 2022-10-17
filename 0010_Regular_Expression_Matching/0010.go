@@ -1,6 +1,6 @@
 package main
 
-// BUG: [0010]
+// FIXME: [0010]
 func isMatch(s string, p string) bool {
 	if len(p) == 0 {
 		return len(s) == 0
