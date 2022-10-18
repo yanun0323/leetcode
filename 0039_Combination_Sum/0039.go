@@ -2,7 +2,7 @@ package main
 
 func combinationSum(candidates []int, target int) [][]int {
 	result := [][]int{}
-	ans := []int{}
+	current := []int{}
 
 	var bt func(left, index int)
 	bt = func(left, index int) {
@@ -11,16 +11,16 @@ func combinationSum(candidates []int, target int) [][]int {
 		}
 
 		if left == 0 {
-			copied := make([]int, len(ans))
-			copy(copied, ans)
-			result = append(result, copied)
+			found := make([]int, len(current))
+			copy(found, current)
+			result = append(result, found)
 			return
 		}
 
 		for i := index; i < len(candidates); i++ {
-			ans = append(ans, candidates[i])
+			current = append(current, candidates[i])
 			bt(left-candidates[i], i)
-			ans = ans[:len(ans)-1]
+			current = current[:len(current)-1]
 		}
 	}
 

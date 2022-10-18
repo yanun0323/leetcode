@@ -1,7 +1,6 @@
 package main
 
 import (
-	"container/heap"
 	"fmt"
 )
 
@@ -28,17 +27,5 @@ func (h *Heap) Push(x interface{}) {
 }
 
 func main() {
-	h := &Heap{data: []int{}}
-	heap.Init(h)
-
-	heap.Push(h, 5)
-	heap.Push(h, 6)
-	heap.Push(h, 7)
-	heap.Push(h, 1)
-	heap.Push(h, 10)
-
-	fmt.Println(h.data)
-	for h.Len() > 0 {
-		fmt.Println(heap.Pop(h))
-	}
+	fmt.Println(int('0'))
 }
