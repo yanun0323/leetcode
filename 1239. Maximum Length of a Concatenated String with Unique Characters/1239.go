@@ -2,7 +2,7 @@ package main
 
 const _Invalid byte = '*'
 
-// TODO: [Yanun] Implement me
+// TODO: [1239] Finish me
 func maxLength(arr []string) int {
 	setMap := make(map[int]map[byte]bool, len(arr))
 	result, current := 0, 0
