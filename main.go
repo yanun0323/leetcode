@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"sync"
 )
 
 type Heap struct {
@@ -28,16 +27,11 @@ func (h *Heap) Push(x interface{}) {
 }
 
 func main() {
-	wg := sync.WaitGroup{}
-	wg.Add(100)
-	for i := 0; i < 100; i++ {
-		go func(i int) {
-			defer wg.Done()
-			print(i)
-		}(i)
-	}
-	wg.Wait()
-	fmt.Println("complete")
+	var b uint8 = 0
+	b = b | (1 << 1)
+	fmt.Println((1 << 1) | (1 << 2))
+	fmt.Println(2 | 2 | 0 | 4)
+	fmt.Println((1 << 2) & (1 << 2))
 }
 
 func print(i int) {
