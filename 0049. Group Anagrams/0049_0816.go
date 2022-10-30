@@ -1,6 +1,6 @@
 package main
 
-func groupAnagrams(strs []string) [][]string {
+func groupAnagrams_old(strs []string) [][]string {
 	letterA := int('a')
 	hash := make(map[uint64][]string, 0)
 	var key uint64
