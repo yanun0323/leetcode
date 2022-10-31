@@ -12,7 +12,7 @@ func treeQueries(root *TreeNode, queries []int) []int {
 	q := []*TreeNode{root}
 	single := 0
 	layer := 0
-	
+
 	for ; len(q) > 0; layer++ {
 		single = 0
 		if len(q) == 1 {
