@@ -3,6 +3,7 @@ package main
 import "container/heap"
 
 // BUG: [1584] Stuck Passed
+
 type Edge struct {
 	a, b     int
 	distance int
@@ -12,12 +13,12 @@ func minCostConnectPoints(p [][]int) int {
 	h := &Heap{}
 	heap.Init(h)
 	for i := range p {
-		for j := range p[i+1:] {
+		for j := i + 1; j < len(p); j++ {
 			heap.Push(h, Edge{a: i, b: j, distance: getDistance(p[i], p[j])})
 		}
 	}
 
-	parent := make([]int, h.Len())
+	parent := make([]int, len(p))
 	for i := range parent {
 		parent[i] = i
 	}
@@ -26,23 +27,20 @@ func minCostConnectPoints(p [][]int) int {
 		if parent[x] != x {
 			return find(parent[x])
 		}
-		return parent[x]
+		return x
 	}
 
 	union := func(a, b int) bool {
-		aP := find(a)
-		bP := find(b)
-		if aP == bP {
-			return false
+		if aP, bP := find(a), find(b); aP != bP {
+			parent[aP] = bP
+			return true
 		}
-		parent[aP] = bP
-		return true
+		return false
 	}
 
 	result := 0
 	for h.Len() > 0 {
-		elem := heap.Pop(h).(Edge)
-		if union(elem.a, elem.b) {
+		if elem := heap.Pop(h).(Edge); union(elem.a, elem.b) {
 			result += elem.distance
 		}
 	}
