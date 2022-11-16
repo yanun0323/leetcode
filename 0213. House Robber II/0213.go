@@ -1,6 +1,6 @@
 package main
 
-// BUG: [0213] 22.11.15 Stuck Passed
+// BUG: [0213] 22.11.14 Stuck Passed
 func rob(houses []int) int {
 	if len(houses) == 1 {
 		return houses[0]
