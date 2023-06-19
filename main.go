@@ -27,11 +27,11 @@ func (h *Heap) Push(x interface{}) {
 }
 
 func main() {
-	var b uint8 = 0
-	b = b | (1 << 1)
-	fmt.Println((1 << 1) | (1 << 2))
-	fmt.Println(2 | 2 | 0 | 4)
-	fmt.Println((1 << 2) & (1 << 2))
+	p1 := [2]int{3, 5}
+	p2 := [2]int{1 + 2, 3 + 2}
+	m := map[[2]int]int{}
+	m[p1] = 10
+	fmt.Println(m[p2])
 }
 
 func print(i int) {
